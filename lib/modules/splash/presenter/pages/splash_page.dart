@@ -64,67 +64,74 @@ class MPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..shader = const LinearGradient(
-        colors: [Color(0xFFB1060F), Color(0xFFE50914), Color(0xFFB1060F)],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
-
     final w = size.width;
     final h = size.height;
 
-    final p = progress.clamp(0.0, 1.0);
+    final p = Curves.easeOutCubic.transform(progress.clamp(0.0, 1.0));
 
-    if (p > 0.0) {
-      final leftProgress = (p * 3).clamp(0.0, 1.0);
+    final basePaint = Paint()
+      ..shader = LinearGradient(
+        colors: const [
+          Color(0xFF7A0000),
+          Color(0xFFE50914),
+          Color(0xFFB1060F),
+          Color(0xFF4A0000),
+        ],
+        stops: const [0.0, 0.4, 0.7, 1.0],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ).createShader(Rect.fromLTWH(0, 0, w, h))
+      ..style = PaintingStyle.fill;
 
-      path.addRect(Rect.fromLTWH(0, 0, w * 0.2, h * leftProgress));
-    }
+    final shimmerPosition = (p * 1.5 - 0.5).clamp(0.0, 1.0);
 
-    if (p > 0.3) {
-      final midProgress = ((p - 0.3) * 3).clamp(0.0, 1.0);
+    final shimmerPaint = Paint()
+      ..shader = LinearGradient(
+        colors: [
+          Colors.transparent,
+          Colors.white.withOpacity(0.25),
+          Colors.transparent,
+        ],
+        stops: const [0.3, 0.5, 0.7],
+        begin: Alignment(-1 + shimmerPosition * 2, -1),
+        end: Alignment(1 + shimmerPosition * 2, 1),
+      ).createShader(Rect.fromLTWH(0, 0, w, h))
+      ..blendMode = BlendMode.plus;
 
-      path.moveTo(0, 0);
-      path.lineTo(w * 0.5 * midProgress, h * midProgress);
-      path.lineTo(w * 0.5 * midProgress + w * 0.2, h * midProgress);
-      path.lineTo(w * 0.2, 0);
-      path.close();
-    }
+    final shadowPaint = Paint()
+      ..color = Colors.black.withOpacity(0.4)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
 
-    if (p > 0.6) {
-      final rightDiagProgress = ((p - 0.6) * 3).clamp(0.0, 1.0);
+    final path = Path();
 
-      path.moveTo(w * 0.5, h);
-      path.lineTo(
-        w * (0.5 + 0.5 * rightDiagProgress),
-        h * (1 - rightDiagProgress),
-      );
-      path.lineTo(
-        w * (0.5 + 0.5 * rightDiagProgress) - w * 0.2,
-        h * (1 - rightDiagProgress),
-      );
-      path.lineTo(w * 0.5 - w * 0.2, h);
-      path.close();
-    }
+    final thickness = w * 0.18;
 
-    if (p > 0.8) {
-      final rightProgress = ((p - 0.8) * 5).clamp(0.0, 1.0);
+    path.moveTo(0, h);
+    path.lineTo(0, 0);
+    path.lineTo(thickness, 0);
+    path.lineTo(w * 0.5, h * 0.65);
+    path.lineTo(w - thickness, 0);
+    path.lineTo(w, 0);
+    path.lineTo(w, h);
+    path.lineTo(w - thickness, h);
+    path.lineTo(w - thickness, thickness);
+    path.lineTo(w * 0.5, h * 0.8);
+    path.lineTo(thickness, thickness);
+    path.lineTo(thickness, h);
+    path.close();
 
-      path.addRect(
-        Rect.fromLTWH(
-          w * 0.8,
-          h * (1 - rightProgress),
-          w * 0.2,
-          h * rightProgress,
-        ),
-      );
-    }
+    final clipHeight = h * p;
 
-    canvas.drawPath(path, paint);
+    canvas.save();
+    canvas.clipRect(Rect.fromLTWH(0, h - clipHeight, w, clipHeight));
+
+    canvas.drawPath(path.shift(const Offset(0, 4)), shadowPaint);
+
+    canvas.drawPath(path, basePaint);
+
+    canvas.drawPath(path, shimmerPaint);
+
+    canvas.restore();
   }
 
   @override

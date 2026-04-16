@@ -1,5 +1,6 @@
 export 'dart:io';
 
+export 'package:animated_text_kit/animated_text_kit.dart';
 export 'package:bloc/bloc.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';

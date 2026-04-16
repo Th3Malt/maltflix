@@ -22,7 +22,6 @@ class MoviePage extends StatelessWidget {
             List<String>? genres;
 
             if (state is MovieLoaded) {
-              image = state.movie.backdropPath ?? movie.posterPath;
               overview = state.movie.overview;
               vote = state.movie.voteAverage;
               genres = state.movie.genres.map((e) => e.name).toList();

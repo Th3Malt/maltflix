@@ -25,6 +25,7 @@ dependencies:
   flutter_svg: ^2.2.4
   shimmer: ^3.0.0
   curl_logger_dio_interceptor: ^1.0.1
+  animated_text_kit: ^4.3.0
 
 dev_dependencies:
   flutter_test:
