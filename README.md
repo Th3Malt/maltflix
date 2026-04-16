@@ -1,4 +1,4 @@
-# 🎬 Maltflix
+<img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2026-04-16 at 09 40 46" src="https://github.com/user-attachments/assets/0fb3b77d-f2f2-444c-a643-05505d896d46" /># 🎬 Maltflix
 
 Aplicação Flutter desenvolvida como teste técnico com o objetivo de exibir um catálogo de filmes consumindo a API da The Movie Database (TMDB).
 
@@ -30,16 +30,30 @@ O projeto apresenta uma interface inspirada em plataformas de streaming, com foc
 - **Service Locator** para injeção de dependências  
 - Separação em camadas
 
----
-
 ## 🛠️ Tecnologias
 
 - **Flutter 3.41.6**
-- Dart
-- HTTP Client
-- Bloc / Cubit
+- **Dart**
 
----
+### 📦 Principais dependências
+
+- **flutter_bloc** — gerenciamento de estado (Cubit)
+- **dio** — client HTTP para consumo da API
+- **go_router** — navegação declarativa
+- **get_it** — injeção de dependências (Service Locator)
+- **flutter_dotenv** — gerenciamento de variáveis de ambiente
+- **infinite_scroll_pagination** — paginação de listas
+- **cached_network_image** — cache e carregamento de imagens
+- **shimmer** — efeito de loading
+- **animated_text_kit** — animações de texto
+- **flutter_svg** — suporte a SVG
+- **curl_logger_dio_interceptor** — logging das requisições HTTP
+
+### 🎨 UI & UX
+
+- Material Design
+- Layout inspirado na Netflix
+- Animações e microinterações
 
 ## ▶️ Como executar
 
@@ -51,9 +65,10 @@ flutter pub get
 flutter run
 ```
 
-<img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2026-04-16 at 09 41 23" src="https://github.com/user-attachments/assets/f8bcfd33-dee1-4745-aaeb-bf6ed455a995" />
-![Uploading Simulator Screenshot - iPhone 16 Pro Max - 2026-04-16 at 09.40.46.png…]()
-![Uploading Simulator Screenshot - iPhone 16 Pro Max - 2026-04-16 at 09.41.16.png…]()
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/f8bcfd33-dee1-4745-aaeb-bf6ed455a995" width="250"/>
+  <img src="https://github.com/user-attachments/assets/82e08dc9-40ef-4263-ab35-9c4cda7f73dd" width="250"/>
+  <img src="https://github.com/user-attachments/assets/940ac71d-d5f3-48d3-b696-3f58b28b26f4" width="250"/>
+</div>
 
 
