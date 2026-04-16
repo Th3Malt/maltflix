@@ -1,4 +1,4 @@
-<img width="1320" height="2868" alt="Simulator Screenshot - iPhone 16 Pro Max - 2026-04-16 at 09 40 46" src="https://github.com/user-attachments/assets/0fb3b77d-f2f2-444c-a643-05505d896d46" /># 🎬 Maltflix
+🎬 Maltflix
 
 Aplicação Flutter desenvolvida como teste técnico com o objetivo de exibir um catálogo de filmes consumindo a API da The Movie Database (TMDB).
 
